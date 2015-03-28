@@ -1,6 +1,8 @@
 package course.labs.activitylab;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -26,22 +28,26 @@ public class ActivityTwo extends Activity {
 	// mCreate, mRestart, mStart and mResume 	
 	// to count calls to onCreate(), onRestart(), onStart() and
 	// onResume(). These variables should not be defined as static.
-	
+	int mCreate = 0;
+	int mRestart = 0;
+	int mStart = 0;
+	int mResume = 0;
 	// You will need to increment these variables' values when their
 	// corresponding lifecycle methods get called.
 	
-
-	
-	
 	// TODO: Create variables for each of the TextViews
-	// named  mTvCreate, mTvRestart, mTvStart, mTvResume.
+	// named mTvCreate, mTvRestart, mTvStart, mTvResume.
 	// for displaying the current count of each counter variable
+	TextView mTvCreate = null;
+	TextView mTvRestart = null;
+	TextView mTvStart = null;
+	TextView mTvResume = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_two);
-
+//		Context context = this.getApplicationContext();
 		// TODO: Assign the appropriate TextViews to the TextView variables
 		// Hint: Access the TextView by calling Activity's findViewById()
 		// textView1 = (TextView) findViewById(R.id.textView1);
@@ -49,8 +55,10 @@ public class ActivityTwo extends Activity {
 
 		
 		
-		
-		
+		mTvCreate = (TextView) findViewById(R.id.create);
+		mTvRestart = (TextView) findViewById(R.id.restart);
+		mTvStart = (TextView) findViewById(R.id.start);
+		mTvResume = (TextView) findViewById(R.id.resume);
 		Button closeButton = (Button) findViewById(R.id.bClose); 
 		closeButton.setOnClickListener(new OnClickListener() {
 
@@ -60,7 +68,7 @@ public class ActivityTwo extends Activity {
 				// TODO:
 				// This function closes Activity Two
 				// Hint: use Context's finish() method
-
+				ActivityTwo.this.finish();
 				
 			
 			}
@@ -72,7 +80,10 @@ public class ActivityTwo extends Activity {
 			// TODO:
 			// Restore value of counters from saved state
 			// Only need 4 lines of code, one for every count variable
-
+			mStart = savedInstanceState.getInt("mStart");
+			mRestart = savedInstanceState.getInt("mRestart");
+			mResume = savedInstanceState.getInt("mResume");
+			mCreate = savedInstanceState.getInt("mCreate");
 
 			
 			
@@ -86,7 +97,9 @@ public class ActivityTwo extends Activity {
 		// TODO:
 		// Update the appropriate count variable
 		// Update the user interface via the displayCounts() method
+		mCreate+=1;
 
+		displayCounts();
 
 		
 		
@@ -104,7 +117,8 @@ public class ActivityTwo extends Activity {
 		// TODO:
 		// Update the appropriate count variable
 		// Update the user interface
-
+		mStart+=1;
+		displayCounts();
 
 		
 		
@@ -120,7 +134,8 @@ public class ActivityTwo extends Activity {
 		// TODO:
 		// Update the appropriate count variable
 		// Update the user interface
-
+		mResume+=1;
+		displayCounts();
 
 	
 	}
@@ -151,7 +166,8 @@ public class ActivityTwo extends Activity {
 		// TODO:
 		// Update the appropriate count variable
 		// Update the user interface
-
+		mRestart+=1;
+		displayCounts();
 
 	
 	
@@ -171,7 +187,12 @@ public class ActivityTwo extends Activity {
 		// TODO:
 		// Save counter state information with a collection of key-value pairs
 		// 4 lines of code, one for every count variable
-
+		mStart = savedInstanceState.getInt(START_KEY);
+		mRestart = savedInstanceState.getInt(RESTART_KEY);
+		mResume = savedInstanceState.getInt(RESUME_KEY);
+		mCreate = savedInstanceState.getInt(CREATE_KEY);
+		super.onSaveInstanceState(savedInstanceState);
+		
 
 
 		
@@ -187,12 +208,19 @@ public class ActivityTwo extends Activity {
 	public void displayCounts() {
 
 		// TODO - uncomment these lines
-	/*
+	
 		mTvCreate.setText("onCreate() calls: " + mCreate);
 		mTvStart.setText("onStart() calls: " + mStart);
 		mTvResume.setText("onResume() calls: " + mResume);
 		mTvRestart.setText("onRestart() calls: " + mRestart);
-	*/
+	
 	
 	}
+	
+//	@Override
+//    public void onConfigurationChanged(Configuration conf) {
+//        super.onConfigurationChanged(conf);
+//        onStart();
+//        onResume();
+//    }
 }
