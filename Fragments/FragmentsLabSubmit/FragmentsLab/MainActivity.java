@@ -30,7 +30,7 @@ public class MainActivity extends Activity implements
 			FragmentManager fragmentManager = this.getFragmentManager();
 			FragmentTransaction transaction = fragmentManager.beginTransaction();
 			transaction.add(R.id.fragment_container,mFeedFragment);
-//            transaction.addToBackStack(null);
+            transaction.addToBackStack(null);
 			transaction.commit();
 		} else {
 
@@ -69,9 +69,8 @@ public class MainActivity extends Activity implements
 			//TODO 2 - replace the fragment_container with the FeedFragment
 			FragmentManager fragmentManager = this.getFragmentManager();
 			FragmentTransaction transaction = fragmentManager.beginTransaction();
-			transaction.add(R.id.fragment_container,mFeedFragment);
 			transaction.replace(R.id.fragment_container,mFeedFragment);
-//            transaction.addToBackStack(null);
+            transaction.addToBackStack(null);
 			transaction.commit();
 
 			

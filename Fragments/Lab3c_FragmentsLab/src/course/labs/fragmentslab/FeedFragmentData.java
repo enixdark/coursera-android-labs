@@ -26,6 +26,7 @@ public class FeedFragmentData {
 		
 	public FeedFragmentData(Context context) {
 		mContext = context;
+		
 		loadFeeds();
 	}
 
